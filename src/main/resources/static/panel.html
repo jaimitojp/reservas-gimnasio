@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de usuario - Gimnasio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/panel.css">
+</head>
+<body>
+<header class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-brand">Gimnasio</div>
+        
+        <div class="nav-cta">
+            <button id="my-profile-btn" class="user-menu-btn" title="Mi cuenta">
+                <div class="user-avatar" id="user-avatar-initial">U</div>
+                <svg class="user-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <a id="my-bookings-btn" href="#" class="btn">Mis reservas</a>
+            <a id="logout-btn" href="#" class="btn">Cerrar sesión</a>
+        </div>
+    </div>
+    <div class="nav-shadow"></div>
+</header>
+
+<main class="app-main">
+    <section class="panel">
+        <h2>Clases disponibles</h2>
+        <div class="cards" id="class-cards"></div>
+    </section>
+</main>
+
+<div id="modal-backdrop" class="modal-backdrop hidden">
+    <div class="modal">
+        <h2>Reserva de clase</h2>
+        <form id="booking-form" class="form">
+            <div class="field">
+                <label for="booking-date">Fecha</label>
+                <input id="booking-date" name="booking-date" type="date" required>
+            </div>
+            <div class="field">
+                <label for="booking-instructor">¿Deseas instructor?</label>
+                <select id="booking-instructor" name="booking-instructor">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+            </div>
+            <div class="actions">
+                <button type="button" id="booking-cancel" class="btn">Cancelar</button>
+                <button type="submit" class="btn primary">Guardar reserva</button>
+            </div>
+        </form>
+    </div>
+    <div id="modal-close-area"></div>
+    </div>
+
+<div id="my-bookings-backdrop" class="modal-backdrop hidden">
+    <div class="modal">
+        <h2>Mis reservas</h2>
+        <div id="my-bookings-list"></div>
+        <div class="actions">
+            <button type="button" id="my-bookings-close" class="btn">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<div id="panel-message-backdrop" class="modal-backdrop hidden">
+    <div class="modal">
+        <h2 id="panel-message-text"></h2>
+    </div>
+</div>
+
+<div id="my-profile-backdrop" class="modal-backdrop hidden">
+    <div class="modal">
+        <h2>Mi cuenta</h2>
+        <form id="my-profile-form" class="form">
+            <div class="field">
+                <label>Nombre de usuario</label>
+                <input id="my-username" type="text">
+            </div>
+            <div class="field">
+                <label>Correo electrónico</label>
+                <input id="my-email" type="email">
+            </div>
+            <div class="field">
+                <label>Nueva contraseña</label>
+                <input id="my-password" type="password" placeholder="Dejar en blanco para no cambiar">
+            </div>
+            <div class="field">
+                <label>Rol</label>
+                <input id="my-role" type="text" disabled>
+            </div>
+            <div class="actions">
+                <button type="button" id="my-profile-cancel" class="btn">Cancelar</button>
+                <button type="submit" class="btn primary">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - Gimnasio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/registro.css">
+</head>
+<body>
+<header class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-brand">Gimnasio</div>
+        <nav class="nav-links">
+            <a href="/">Inicio</a>
+            <a href="/sobre-nosotros.html">Sobre nosotros</a>
+            <a href="/experiencias.html">Experiencias</a>
+        </nav>
+        <div class="nav-cta">
+            <a href="/registro.html" class="btn">Registro</a>
+            <a href="/login.html" class="btn primary">Iniciar sesión</a>
+        </div>
+    </div>
+    <div class="nav-shadow"></div>
+</header>
+
+<main class="auth-main">
+    <div class="auth-hero"></div>
+    <section class="auth-card">
+        <p class="auth-subtitle">Regístrate para comenzar hoy.</p>
+        <form id="register-form" class="form">
+            <div class="field">
+                <label for="reg-username">Nombre de usuario</label>
+                <input id="reg-username" name="username" type="text" required>
+            </div>
+            <div class="field">
+                <label for="reg-email">Email</label>
+                <input id="reg-email" name="email" type="email" required>
+            </div>
+            <div class="field">
+                <label for="reg-password">Contraseña</label>
+                <div class="input-icon-left">
+                    <button type="button" id="toggle-reg-password" class="icon-eye" aria-label="Mostrar/Ocultar">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                            <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12a5 5 0 110-10 5 5 0 010 10z"></path>
+                        </svg>
+                    </button>
+                    <input id="reg-password" name="password" type="password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn primary auth-primary">Registrarse</button>
+        </form>
+        <div class="auth-footer">¿Ya tienes una cuenta? <a href="/login.html">Inicia sesión</a></div>
+    </section>
+</main>
+
+<div id="panel-message-backdrop" class="modal-backdrop hidden">
+    <div class="modal">
+        <h2 id="panel-message-text"></h2>
+    </div>
+</div>
+<script src="/js/app.js"></script>
+</body>
+</html>

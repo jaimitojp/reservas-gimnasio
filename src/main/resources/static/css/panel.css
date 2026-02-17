@@ -1,0 +1,20 @@
+/* Estilos específicos del panel del usuario */
+.app-main {
+    grid-template-columns: 1fr;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.card p {
+    color: #4b5563;
+}
+
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}

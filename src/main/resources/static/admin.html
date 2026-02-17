@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel administrador - Gimnasio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<header class="site-nav">
+    <div class="nav-inner">
+        <div class="nav-brand">Gimnasio</div>
+        
+        <div class="nav-cta">
+            <button id="admin-profile-btn" class="user-menu-btn" title="Mi cuenta">
+                <div class="user-avatar" id="admin-avatar-initial">A</div>
+                <svg class="user-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <a id="logout-btn" href="#" class="btn">Cerrar sesión</a>
+        </div>
+    </div>
+    <div class="nav-shadow"></div>
+
+<main class="admin-layout">
+    <aside class="sidebar">
+        <nav class="side-nav">
+            <a href="#" data-target="users-section" class="side-link active">Usuarios</a>
+            <a href="#" data-target="reservas-section" class="side-link">Reservas</a>
+            <a href="#" data-target="classes-section" class="side-link">Clases</a>
+        </nav>
+    </aside>
+    <section class="admin-main panel dash-section" id="users-section">
+        <h2>Usuarios</h2>
+        <div class="filters-centered">
+            <div class="search-bar">
+                <input id="user-search" type="text" placeholder="Buscar por nombre/email">
+                <button class="search-icon-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+            </div>
+            <select id="user-filter-role" class="filter-select">
+                <option value="TODOS">Todos</option>
+                <option value="USUARIOS">Usuarios</option>
+                <option value="ADMINS">Admins</option>
+            </select>
+        </div>
+        <form id="user-form" class="form inline">
+            <input id="user-username" type="text" placeholder="Nombre de usuario" required>
+            <input id="user-email" type="email" placeholder="Email" required>
+            <div class="input-icon-right">
+                <input id="user-password" type="password" placeholder="Contraseña" required>
+                <button type="button" id="toggle-admin-user-password" class="icon-eye" aria-label="Mostrar/Ocultar">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                        <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12a5 5 0 110-10 5 5 0 010 10z"></path>
+                    </svg>
+                </button>
+            </div>
+            <select id="user-role">
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+            </select>
+            <button type="submit" class="btn">Crear</button>
+        </form>
+        <table class="table" id="users-table">
+            <thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Role</th><th>Acciones</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+    <section class="admin-main panel dash-section hidden" id="reservas-section">
+        <h2>Reservas</h2>
+        <form id="reserva-form-admin" class="form inline">
+            <input id="b-username" type="text" placeholder="Nombre del usuario" required>
+            <input id="b-resource-id" type="number" placeholder="ID Clase" required>
+            <input id="b-fecha" type="date" required>
+            <select id="b-con-instructor">
+                <option value="no">Sin instructor</option>
+                <option value="si">Con instructor</option>
+            </select>
+            <button type="submit" class="btn">Crear</button>
+        </form>
+        <table class="table" id="reservas-table">
+            <thead><tr><th>ID_RESERVA</th><th>Usuario</th><th>Clase</th><th>Fecha reserva</th><th>Instructor</th><th>Acciones</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+    
+    <section class="admin-main panel dash-section hidden" id="classes-section">
+        <h2>Clases</h2>
+        <form id="class-form" class="form inline">
+            <input id="c-nombre" type="text" placeholder="Nombre de la clase" required>
+            <input id="c-descripcion" type="text" placeholder="Descripción de la clase" required>
+            <input id="c-hora" type="time" placeholder="Hora de la clase">
+            <input id="c-capacidad" type="number" placeholder="Capacidad" min="0" step="1" required>
+            <input id="c-instructor-nombre" type="text" placeholder="Nombre del instructor">
+            <button type="submit" class="btn">Crear</button>
+        </form>
+        <table class="table" id="classes-table">
+            <thead><tr><th>ID</th><th>Nombre</th><th>Descripción</th><th>Hora</th><th>Capacidad</th><th>Instructor</th><th>Acciones</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+    <div id="edit-class-backdrop" class="modal-backdrop hidden">
+        <div class="modal">
+            <h2>Editar clase</h2>
+            <form id="edit-class-form" class="form">
+                <input type="hidden" id="edit-id">
+                <div class="field">
+                    <div>
+                        <label>Nombre actual</label>
+                        <div id="edit-current-nombre" class="hint"></div>
+                    </div>
+                    <div>
+                        <label>Nuevo nombre</label>
+                        <input id="edit-nombre" type="text">
+                    </div>
+                </div>
+                <div class="field">
+                    <div>
+                        <label>Descripción actual</label>
+                        <div id="edit-current-descripcion" class="hint"></div>
+                    </div>
+                    <div>
+                        <label>Nueva descripción</label>
+                        <input id="edit-descripcion" type="text">
+                    </div>
+                </div>
+                <div class="field">
+                    <div>
+                        <label>Hora actual</label>
+                        <div id="edit-current-hora" class="hint"></div>
+                    </div>
+                    <div>
+                        <label>Nueva hora</label>
+                        <input id="edit-hora" type="time">
+                    </div>
+                </div>
+                <div class="field">
+                    <div>
+                        <label>Capacidad actual</label>
+                        <div id="edit-current-capacidad" class="hint"></div>
+                    </div>
+                    <div>
+                        <label>Nueva capacidad</label>
+                        <input id="edit-capacidad" type="number" min="0" step="1">
+                    </div>
+                </div>
+                <div class="field">
+                    <div>
+                        <label>Instructor actual</label>
+                        <div id="edit-current-instructor" class="hint"></div>
+                    </div>
+                    <div>
+                        <label>Nuevo instructor</label>
+                        <input id="edit-instructor-nombre" type="text">
+                    </div>
+                </div>
+                <div class="actions">
+                    <button type="button" id="edit-class-cancel" class="btn">Cancelar</button>
+                    <button type="submit" class="btn primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <div id="edit-class-close-area"></div>
+    </div>
+    <div id="edit-user-backdrop" class="modal-backdrop hidden">
+        <div class="modal">
+            <h2>Editar usuario</h2>
+            <form id="edit-user-form" class="form">
+                <input type="hidden" id="edit-user-id">
+                <div class="field">
+                    <div>
+                        <label>Nombre actual</label>
+                        <div id="edit-current-username" class="hint"></div>
+                    </div>
+                    <div>
+                        <label>Nuevo nombre de usuario</label>
+                        <input id="edit-username" type="text" required>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button type="button" id="edit-user-cancel" class="btn">Cancelar</button>
+                    <button type="submit" class="btn primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <div id="edit-user-close-area"></div>
+    </div>
+    <div id="change-pw-backdrop" class="modal-backdrop hidden">
+        <div class="modal">
+            <h2>Cambiar contraseña</h2>
+            <form id="change-pw-form" class="form">
+                <input type="hidden" id="change-pw-user-id">
+                <div class="field">
+                    <div>
+                        <label>Usuario</label>
+                        <div id="change-pw-username" class="hint"></div>
+                    </div>
+                    <div>
+                        <label>Nueva contraseña</label>
+                        <div class="input-icon-left">
+                            <button type="button" id="toggle-change-pw" class="icon-eye" aria-label="Mostrar/Ocultar">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12a5 5 0 110-10 5 5 0 010 10z"></path>
+                                </svg>
+                            </button>
+                            <input id="change-pw-input" type="password" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button type="button" id="change-pw-cancel" class="btn">Cancelar</button>
+                    <button type="submit" class="btn primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+        <div id="change-pw-close-area"></div>
+    </div>
+    <div id="message-backdrop" class="modal-backdrop hidden">
+        <div class="modal">
+            <h2 id="message-text"></h2>
+        </div>
+    </div>
+    <div id="admin-profile-backdrop" class="modal-backdrop hidden">
+        <div class="modal">
+            <h2>Mi cuenta</h2>
+            <div class="panel" id="admin-profile-content"></div>
+            <div class="actions">
+                <button type="button" id="admin-profile-close" class="btn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/app.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
